@@ -14,18 +14,24 @@
 
 
   
-  <title>Hello World! | D.A.Zhou&#39;s Blog</title>
+  <title>开始学习线性表 | D.A.Zhou&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="嘛总之先试试看？">
+  <meta name="description" content="开始学线性表了······有些地方还挺难理解的
+我打算用c++逐一实现一下，感觉会很有趣呐
+那么，下面给出第一个纯虚类——List类的实现。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World!">
-<meta property="og:url" content="http://yoursite.com/2015/06/04/HELLOWORLD/index.html">
+<meta property="og:title" content="开始学习线性表">
+<meta property="og:url" content="http://yoursite.com/2015/06/08/开始学习线性表/index.html">
 <meta property="og:site_name" content="D.A.Zhou's Blog">
-<meta property="og:description" content="嘛总之先试试看？">
-<meta property="og:updated_time" content="2015-06-04T15:36:20.203Z">
+<meta property="og:description" content="开始学线性表了······有些地方还挺难理解的
+我打算用c++逐一实现一下，感觉会很有趣呐
+那么，下面给出第一个纯虚类——List类的实现。">
+<meta property="og:updated_time" content="2015-06-08T12:31:15.299Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World!">
-<meta name="twitter:description" content="嘛总之先试试看？">
+<meta name="twitter:title" content="开始学习线性表">
+<meta name="twitter:description" content="开始学线性表了······有些地方还挺难理解的
+我打算用c++逐一实现一下，感觉会很有趣呐
+那么，下面给出第一个纯虚类——List类的实现。">
   
     <link rel="alternative" href="/atom.xml" title="D.A.Zhou&#39;s Blog" type="application/atom+xml">
   
@@ -76,16 +82,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-HELLOWORLD" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-开始学习线性表" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/06/04/HELLOWORLD/" class="article-date">
-  <time datetime="2015-06-04T05:58:13.000Z" itemprop="datePublished">2015-06-04</time>
+    <a href="/2015/06/08/开始学习线性表/" class="article-date">
+  <time datetime="2015-06-08T12:23:31.000Z" itemprop="datePublished">2015-06-08</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -94,7 +96,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World!
+      开始学习线性表
     </h1>
   
 
@@ -102,21 +104,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>嘛总之先试试看？<br><a id="more"></a><br>这个站点以后会发一些乱七八糟的东西<br>    C++:</p>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span>
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
-</span>{
-    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"hello world!"</span>&lt;&lt;<span class="built_in">std</span>::endl;
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-</code></pre>
+        <p>开始学线性表了······有些地方还挺难理解的</p>
+<p>我打算用c++逐一实现一下，感觉会很有趣呐</p>
+<p>那么，下面给出第一个纯虚类——List类的实现。</p>
+<a id="more"></a>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">List.h</span><br><span class="line"><span class="preprocessor">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> List</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">const</span> T&amp; X)</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Remove</span><span class="params">(<span class="keyword">int</span> pos)</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Retrive</span><span class="params">(<span class="keyword">int</span> pos, T&amp; X)</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Replace</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">const</span> T&amp; X)</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">Length</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">IsFull</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Clear</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>以后会用这个类派生各种线性表</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/HELLOWORLD/" data-id="cianvn85x000028o0i98kwpia" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/开始学习线性表/" data-id="cianvnx780000loo0g6i2ts5z" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/article/">article</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
 
     </footer>
   </div>
@@ -124,15 +125,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/06/06/开启我的算法与数据结构学习之路！/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          开启我的算法与数据结构学习之路！
-        
-      </div>
-    </a>
   
+    <a href="/2015/06/06/最先接触的两个算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">最先接触的两个算法</div>
+    </a>
   
 </nav>
 
@@ -142,7 +139,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-HELLOWORLD" data-title="Hello World!" data-url="http://yoursite.com/2015/06/04/HELLOWORLD/"></div>
+    <div class="ds-thread" data-thread-key="post-开始学习线性表" data-title="开始学习线性表" data-url="http://yoursite.com/2015/06/08/开始学习线性表/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
