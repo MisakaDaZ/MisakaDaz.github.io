@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?40bd43e983d05b0e3cdbec388db9367b";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+     })();
+  </script>
+
+
+  
+  <title>最长回文字符串问题 | D.A.Zhou&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="想想这个站也搁置许久未更新了····怪我太懒。今天就上一个最长回文子串问题的c++实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最长回文字符串问题">
+<meta property="og:url" content="http://yoursite.com/2015/07/08/最长回文字符串问题/index.html">
+<meta property="og:site_name" content="D.A.Zhou's Blog">
+<meta property="og:description" content="想想这个站也搁置许久未更新了····怪我太懒。今天就上一个最长回文子串问题的c++实现。">
+<meta property="og:updated_time" content="2015-07-08T14:51:08.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最长回文字符串问题">
+<meta name="twitter:description" content="想想这个站也搁置许久未更新了····怪我太懒。今天就上一个最长回文子串问题的c++实现。">
+  
+    <link rel="alternative" href="/atom.xml" title="D.A.Zhou&#39;s Blog" type="application/atom+xml">
+  
+  
+    <!--<link rel="icon" href="/favicon.png">-->
+	<link href="/favicon.ico" rel="icon" type="image/x-ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">D.A.Zhou&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Talk is cheap, show me the code     ——一个普通中学生的个人小站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-最长回文字符串问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/07/08/最长回文字符串问题/" class="article-date">
+  <time datetime="2015-07-08T14:39:17.000Z" itemprop="datePublished">2015-07-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      最长回文字符串问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>想想这个站也搁置许久未更新了····怪我太懒。今天就上一个最长回文子串问题的c++实现。<br><a id="more"></a><br>运用“问题求解”思想，我直接定义了一个void函数。为了让运行时的函数更清晰明了，我先定义了一个宏。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> RUN(X) cout&lt;&lt;#X&lt;&lt;" is running..."&lt;&lt;endl;X();</span></span><br><span class="line"><span class="comment">//#X可取得X的字符串表示。</span></span><br></pre></td></tr></table></figure></p>
+<p>随后是程序主体，主要思想是通过枚举子串的“中点”和“相对中点偏移量”，求出最长子串。两个for则是因为长度为奇数和偶数的子串处理方式有所不同。若中点为整数N，偏移量为整数T，对于长度为奇数的子串来说，其最左方的一点为N-T,最右方的一点为N+T，如果长度为偶数，则这个中点实际是最中心两个字符中靠左的一个的INDEX，所以其左端为N-T，右端为(N+1)-T。<br>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">palindrome</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">5000</span> + <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> left,right,indexOfNewStr = <span class="number">0</span>,max=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> oldIndexForNewStr[MAXN];</span><br><span class="line">	<span class="keyword">char</span> str[MAXN],newstr[MAXN];</span><br><span class="line">	<span class="built_in">memset</span>(str, <span class="number">0</span>, <span class="keyword">sizeof</span>(str));</span><br><span class="line">	<span class="built_in">memset</span>(newstr, <span class="number">0</span>, <span class="keyword">sizeof</span>(newstr));</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">cin</span>.getline(str, <span class="keyword">sizeof</span>(str));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(str); i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">isalpha</span>(str[i]))&#123;</span><br><span class="line">			oldIndexForNewStr[indexOfNewStr] = i;</span><br><span class="line">			newstr[indexOfNewStr++] = <span class="built_in">toupper</span>(str[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; indexOfNewStr; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> diviation = <span class="number">0</span>; i - diviation &gt;= <span class="number">0</span> &amp;&amp; i + diviation &lt; indexOfNewStr; diviation++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (newstr[i - diviation] != newstr[i + diviation])</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">if</span> (<span class="number">2</span> * diviation + <span class="number">1</span>&gt;max)&#123;</span><br><span class="line">				max = diviation * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">				left = oldIndexForNewStr[i - diviation];</span><br><span class="line">				right = oldIndexForNewStr[i + diviation];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="comment">//处理个数为奇数的回文串</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> diviation = <span class="number">0</span>; i - diviation &gt;= <span class="number">0</span> &amp;&amp; i + diviation + <span class="number">1</span> &lt; indexOfNewStr; diviation++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (newstr[i - diviation] != newstr[i + diviation + <span class="number">1</span>])</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">if</span> (<span class="number">2</span> * diviation + <span class="number">2</span> &gt; max)&#123;</span><br><span class="line">				max = <span class="number">2</span> * diviation + <span class="number">2</span>;</span><br><span class="line">				left = oldIndexForNewStr[i - diviation];</span><br><span class="line">				right = oldIndexForNewStr[i + <span class="number">1</span> + diviation];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt;= right; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; str[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/08/最长回文字符串问题/" data-id="cibuvvkjw000714o0n7x83sxy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/06/08/开始学习线性表/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">开始学习线性表</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-最长回文字符串问题" data-title="最长回文字符串问题" data-url="http://yoursite.com/2015/07/08/最长回文字符串问题/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'misakadaz'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+  
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/article/">article</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/07/08/最长回文字符串问题/">最长回文字符串问题</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/08/开始学习线性表/">开始学习线性表</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/最先接触的两个算法/">最先接触的两个算法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/04/HELLOWORLD/">Hello World!</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 D.A.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
