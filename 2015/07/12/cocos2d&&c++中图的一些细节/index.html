@@ -14,17 +14,21 @@
 
 
   
-  <title>D.A.Zhou&#39;s Blog</title>
+  <title>cocos2d/c++ 中图的一些细节 | D.A.Zhou&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="D.A.Zhou's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2d/c++ 中图的一些细节">
+<meta property="og:url" content="http://yoursite.com/2015/07/12/cocos2d&&c++中图的一些细节/index.html">
 <meta property="og:site_name" content="D.A.Zhou's Blog">
-<meta property="og:description">
+<meta property="og:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
+<meta property="og:image" content="http://i3.tietuku.com/b6f088ef850031f1t.jpg">
+<meta property="og:image" content="http://i3.tietuku.com/0666120feaf00134t.jpg">
+<meta property="og:image" content="http://i3.tietuku.com/5a7b261130ecacf3t.jpg">
+<meta property="og:updated_time" content="2015-07-12T11:51:31.188Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="D.A.Zhou's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="cocos2d/c++ 中图的一些细节">
+<meta name="twitter:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
   
     <link rel="alternative" href="/atom.xml" title="D.A.Zhou&#39;s Blog" type="application/atom+xml">
   
@@ -75,9 +79,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-cocos2d&amp;&amp;c++中图的一些细节" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-cocos2d&amp;&amp;c++中图的一些细节" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/07/12/cocos2d&&c++中图的一些细节/" class="article-date">
   <time datetime="2015-07-12T11:09:04.000Z" itemprop="datePublished">2015-07-12</time>
@@ -90,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/12/cocos2d&&c++中图的一些细节/">cocos2d/c++ 中图的一些细节</a>
+    <h1 class="article-title" itemprop="name">
+      cocos2d/c++ 中图的一些细节
     </h1>
   
 
@@ -133,205 +135,43 @@
     </footer>
   </div>
   
-</article>
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/08/最长回文字符串问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">最长回文字符串问题</div>
+    </a>
+  
+</nav>
 
-  
-  
-  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-    <article id="post-最长回文字符串问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/07/08/最长回文字符串问题/" class="article-date">
-  <time datetime="2015-07-08T14:39:17.000Z" itemprop="datePublished">2015-07-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/08/最长回文字符串问题/">最长回文字符串问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>想想这个站也搁置许久未更新了····怪我太懒。今天就上一个最长回文子串问题的c++实现。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/07/08/最长回文字符串问题/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/08/最长回文字符串问题/" data-id="cic0f80ms0007b0o0w9nyqf9k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
   
-  
-  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-    <article id="post-开始学习线性表" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/08/开始学习线性表/" class="article-date">
-  <time datetime="2015-06-08T12:23:31.000Z" itemprop="datePublished">2015-06-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/08/开始学习线性表/">开始学习线性表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开始学线性表了······有些地方还挺难理解的</p>
-<p>我打算用c++逐一实现一下，感觉会很有趣呐</p>
-<p>那么，下面给出第一个纯虚类——List类的实现。</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/06/08/开始学习线性表/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/开始学习线性表/" data-id="cic0f80u5000cb0o04c1p5u43" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-cocos2d&amp;&amp;c++中图的一些细节" data-title="cocos2d/c++ 中图的一些细节" data-url="http://yoursite.com/2015/07/12/cocos2d&amp;&amp;c++中图的一些细节/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'misakadaz'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
   
   
   <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-    <article id="post-最先接触的两个算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/06/最先接触的两个算法/" class="article-date">
-  <time datetime="2015-06-06T12:41:48.000Z" itemprop="datePublished">2015-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/06/最先接触的两个算法/">最先接触的两个算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接触到了两个最简单的排序算法————冒泡排序和快速排序。下面将我的实现贴一下。</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/06/06/最先接触的两个算法/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/06/最先接触的两个算法/" data-id="cic0f80to000ab0o08z38ct1a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
-  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-    <article id="post-HELLOWORLD" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/04/HELLOWORLD/" class="article-date">
-  <time datetime="2015-06-04T05:58:13.000Z" itemprop="datePublished">2015-06-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/04/HELLOWORLD/">Hello World!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>嘛总之先试试看？<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/06/04/HELLOWORLD/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/HELLOWORLD/" data-id="cic0f80m30000b0o0nd2gwzah" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/article/">article</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
-  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-  
-</section>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></section>
         
           <aside id="sidebar">
   
