@@ -16,19 +16,19 @@
   
   <title>cocos2d/c++ 中图的一些细节 | D.A.Zhou&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
+  <meta name="description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cocos2d/c++ 中图的一些细节">
 <meta property="og:url" content="http://yoursite.com/2015/07/12/cocos2d&&c++中图的一些细节/index.html">
 <meta property="og:site_name" content="D.A.Zhou's Blog">
-<meta property="og:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
+<meta property="og:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上。">
 <meta property="og:image" content="http://i3.tietuku.com/b6f088ef850031f1t.jpg">
 <meta property="og:image" content="http://i3.tietuku.com/0666120feaf00134t.jpg">
 <meta property="og:image" content="http://i3.tietuku.com/5a7b261130ecacf3t.jpg">
-<meta property="og:updated_time" content="2015-07-12T11:51:31.188Z">
+<meta property="og:updated_time" content="2015-07-12T11:53:21.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d/c++ 中图的一些细节">
-<meta name="twitter:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。代码是这样的：typedef std::vector&amp;lt;std::function&amp;lt;void()&amp;gt;&amp;gt; funcArr;std::map&amp;lt;float,funcArr*&amp;gt; m_funcMap;">
+<meta name="twitter:description" content="今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上。">
   
     <link rel="alternative" href="/atom.xml" title="D.A.Zhou&#39;s Blog" type="application/atom+xml">
   
@@ -101,7 +101,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上，由于函数可能不止一个，所以用队列表示。<br>代码是这样的：<br><code>typedef std::vector&lt;std::function&lt;void()&gt;&gt; funcArr;</code><br><code>std::map&lt;float,funcArr*&gt; m_funcMap;</code></p>
+        <p>今天试着用cocos2d做了个带callback功能的计时器类，大致思路是把每个需要callback的时间映射到该时间需要运行的回调函数上。<br><a id="more"></a><br>由于函数可能不止一个，所以用队列表示。<br>代码是这样的：<br><code>typedef std::vector&lt;std::function&lt;void()&gt;&gt; funcArr;</code><br><code>std::map&lt;float,funcArr*&gt; m_funcMap;</code></p>
 <p>一开始我直接用的cocos2d自带的Map，结果运行报错。</p>
 <p><a href="http://i3.tietuku.com/b6f088ef850031f1.png" title="点击显示原始图片" target="_blank" rel="external"><img src="http://i3.tietuku.com/b6f088ef850031f1t.jpg"></a></p>
 <p>转到报错文件：</p>
