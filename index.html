@@ -77,6 +77,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python实现的爬取中考成绩的爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/10/python实现的爬取中考成绩的爬虫/" class="article-date">
+  <time datetime="2016-07-09T16:06:52.000Z" itemprop="datePublished">2016-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/10/python实现的爬取中考成绩的爬虫/">python实现的爬取中考成绩的爬虫</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>搭了这个站以后废弃了将近一年的更新…</p>
+<p>今天先贴代码吧，明天再更详细思路<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__author__ = &#39;lenovo&#39;&#10;# -*- coding: utf-8 -*-&#10;import urllib&#10;import urllib2&#10;import time&#10;import re&#10;import win32com.client as win32&#10;&#10;&#10;app = &#39;Excel&#39;&#10;xl = win32.gencache.EnsureDispatch(&#34;%s.Application&#34; % app)&#10;ss = xl.Workbooks.Add()&#10;sh = ss.ActiveSheet&#10;xl.Visible = True&#10;&#10;url = &#39;http://120.68.42.165/zkbm.aspx&#39;&#10;canRead = True&#10;&#10;data = &#123;&#125;&#10;data[&#39;__VIEWSTATE&#39;] = &#39;/wEPDwUJODY3NzAxNTIwD2QWAgIDD2QWBAIFDzwrAAkBAA8WBB4IRGF0YUtleXMWAB4LXyFJdGVtQ291bnRmZGQCCQ8PFgIeBFRleHQFBjc5Nzg5OGRkZPrjeAlWYhlBFkeS8QkxaRDQzEWf&#39;&#10;data[&#39;__EVENTVALIDATION&#39;] = &#39;/wEWAwLFkKffCQLs0bLrBgKM54rGBtT6sKRrHMmRWoKDAd/Dquwwe5N4&#39;&#10;data[&#39;Button1&#39;] = &#39;&#230;&#159;&#165;&#231;&#156;&#139;&#231;&#173;&#137;&#231;&#186;&#167;&#39;&#10;data[&#39;TextBox1&#39;] = &#39;240110001&#39;&#10;&#10;&#10;replaceData = [&#34;&#22995;&#21517;&#65306;&#34;, &#34;&#27665;&#26063;&#65306;&#34;, &#34;&#36523;&#20221;&#35777;&#21495;&#65306;&#34;, &#34;&#27605;&#19994;&#20013;&#23398;&#65306;&#34;, &#34;&#35821;&#25991;&#65306;&#34;, &#34;&#29289;&#29702;\&#21270;&#23398;&#65306;&#34;, &#34;&#25968;&#23398;&#65306;&#34;,&#34;&#33521;&#35821;\&#27721;&#35821;&#65306;&#34;, &#34;&#24605;&#24819;&#21697;&#24503;\&#21382;&#21490;&#65306;&#34;, &#34;&#31561;&#32423;&#23567;&#35745;&#65306;&#34;]&#10;&#10;studentData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]&#10;&#10;post_data = urllib.urlencode(data)&#10;req = urllib2.urlopen(url, post_data)&#10;content = req.read().split(&#39;\n&#39;)&#10;&#10;for eachLine in content:&#10;    if eachLine.find(r&#34;&#22995;&#21517;&#34;) != -1:&#10;        studentData[0] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#27665;&#26063;&#34;) != -1:&#10;        studentData[1] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#36523;&#20221;&#35777;&#21495;&#34;) != -1:&#10;        studentData[2] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#27605;&#19994;&#20013;&#23398;&#34;) != -1:&#10;        studentData[3] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#35821;&#25991;&#34;) != -1:&#10;        studentData[4] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#29289;&#29702;&#34;) != -1:&#10;        studentData[5] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#25968;&#23398;&#34;) != -1:&#10;        studentData[6] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#33521;&#35821;&#34;) != -1:&#10;        studentData[7] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#24605;&#24819;&#21697;&#24503;&#34;) != -1:&#10;        studentData[8] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#31561;&#32423;&#23567;&#35745;&#34;) != -1:&#10;        studentData[9] = content.index(eachLine)&#10;&#10;number = 1&#10;&#10;while canRead:&#10;    i = 0&#10;    if req.read().find(r&#34;&#20934;&#32771;&#35777;&#21495;&#26377;&#35823;&#34;) != -1:&#10;        break&#10;    for each in studentData:&#10;        output = re.sub(r&#34;&#60;.+&#62;+|&#60;.+&#34;, &#34;&#34;, content[each]).replace(&#34; &#34;, &#39;&#39;).replace(replaceData[i], &#39;&#39;)&#10;        #print output&#10;        sh.Cells(number+1, i+1).Value = output.decode(&#39;utf-8&#39;).encode(&#39;gbk&#39;)&#10;&#10;        i += 1&#10;    number += 1&#10;    data[&#39;TextBox1&#39;] = &#39;24011&#39; + str(number).zfill(4)&#10;    post_data = urllib.urlencode(data)&#10;    req = urllib2.urlopen(url, post_data)&#10;    content = req.read().split(&#39;\n&#39;)&#10;    time.sleep(1)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/10/python实现的爬取中考成绩的爬虫/" data-id="ciqfd6mw4000cxgo04lq2kgy3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+  
+  
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+  
     <article id="post-cocos2d&amp;&amp;c++中图的一些细节" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/07/12/cocos2d&&c++中图的一些细节/" class="article-date">
@@ -108,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/cocos2d&&c++中图的一些细节/" data-id="ciqfd3yyn000fk0o05wiiavpn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/cocos2d&&c++中图的一些细节/" data-id="ciqfd6mw7000dxgo0emubaz0p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos2d游戏开发/">cocos2d游戏开发</a></li></ul>
@@ -154,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/08/最长回文字符串问题/" data-id="ciqfd3yyf0007k0o0qkb9isst" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/08/最长回文字符串问题/" data-id="ciqfd6mvs0007xgo0qvzy6zxq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -200,53 +241,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/06/冒泡排序与快速排序/" data-id="ciqfd3yyi000ak0o037lva1c8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/06/冒泡排序与快速排序/" data-id="ciqfd6mw2000axgo0uopw0dc2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
-  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  
-    <article id="post-python实现的爬取中考成绩的爬虫" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/06/python实现的爬取中考成绩的爬虫/" class="article-date">
-  <time datetime="2015-06-06T12:41:48.000Z" itemprop="datePublished">2015-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/06/python实现的爬取中考成绩的爬虫/">python实现的爬取中考成绩的爬虫</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>搭了这个站以后废弃了将近一年的更新…</p>
-<p>今天先贴代码吧，明天再更详细思路<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__author__ = &#39;lenovo&#39;&#10;# -*- coding: utf-8 -*-&#10;import urllib&#10;import urllib2&#10;import time&#10;import re&#10;import win32com.client as win32&#10;&#10;&#10;app = &#39;Excel&#39;&#10;xl = win32.gencache.EnsureDispatch(&#34;%s.Application&#34; % app)&#10;ss = xl.Workbooks.Add()&#10;sh = ss.ActiveSheet&#10;xl.Visible = True&#10;&#10;url = &#39;http://120.68.42.165/zkbm.aspx&#39;&#10;canRead = True&#10;&#10;data = &#123;&#125;&#10;data[&#39;__VIEWSTATE&#39;] = &#39;/wEPDwUJODY3NzAxNTIwD2QWAgIDD2QWBAIFDzwrAAkBAA8WBB4IRGF0YUtleXMWAB4LXyFJdGVtQ291bnRmZGQCCQ8PFgIeBFRleHQFBjc5Nzg5OGRkZPrjeAlWYhlBFkeS8QkxaRDQzEWf&#39;&#10;data[&#39;__EVENTVALIDATION&#39;] = &#39;/wEWAwLFkKffCQLs0bLrBgKM54rGBtT6sKRrHMmRWoKDAd/Dquwwe5N4&#39;&#10;data[&#39;Button1&#39;] = &#39;&#230;&#159;&#165;&#231;&#156;&#139;&#231;&#173;&#137;&#231;&#186;&#167;&#39;&#10;data[&#39;TextBox1&#39;] = &#39;240110001&#39;&#10;&#10;&#10;replaceData = [&#34;&#22995;&#21517;&#65306;&#34;, &#34;&#27665;&#26063;&#65306;&#34;, &#34;&#36523;&#20221;&#35777;&#21495;&#65306;&#34;, &#34;&#27605;&#19994;&#20013;&#23398;&#65306;&#34;, &#34;&#35821;&#25991;&#65306;&#34;, &#34;&#29289;&#29702;\&#21270;&#23398;&#65306;&#34;, &#34;&#25968;&#23398;&#65306;&#34;,&#34;&#33521;&#35821;\&#27721;&#35821;&#65306;&#34;, &#34;&#24605;&#24819;&#21697;&#24503;\&#21382;&#21490;&#65306;&#34;, &#34;&#31561;&#32423;&#23567;&#35745;&#65306;&#34;]&#10;&#10;studentData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]&#10;&#10;post_data = urllib.urlencode(data)&#10;req = urllib2.urlopen(url, post_data)&#10;content = req.read().split(&#39;\n&#39;)&#10;&#10;for eachLine in content:&#10;    if eachLine.find(r&#34;&#22995;&#21517;&#34;) != -1:&#10;        studentData[0] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#27665;&#26063;&#34;) != -1:&#10;        studentData[1] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#36523;&#20221;&#35777;&#21495;&#34;) != -1:&#10;        studentData[2] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#27605;&#19994;&#20013;&#23398;&#34;) != -1:&#10;        studentData[3] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#35821;&#25991;&#34;) != -1:&#10;        studentData[4] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#29289;&#29702;&#34;) != -1:&#10;        studentData[5] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#25968;&#23398;&#34;) != -1:&#10;        studentData[6] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#33521;&#35821;&#34;) != -1:&#10;        studentData[7] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#24605;&#24819;&#21697;&#24503;&#34;) != -1:&#10;        studentData[8] = content.index(eachLine)&#10;    elif eachLine.find(r&#34;&#31561;&#32423;&#23567;&#35745;&#34;) != -1:&#10;        studentData[9] = content.index(eachLine)&#10;&#10;number = 1&#10;&#10;while canRead:&#10;    i = 0&#10;    if req.read().find(r&#34;&#20934;&#32771;&#35777;&#21495;&#26377;&#35823;&#34;) != -1:&#10;        break&#10;    for each in studentData:&#10;        output = re.sub(r&#34;&#60;.+&#62;+|&#60;.+&#34;, &#34;&#34;, content[each]).replace(&#34; &#34;, &#39;&#39;).replace(replaceData[i], &#39;&#39;)&#10;        #print output&#10;        sh.Cells(number+1, i+1).Value = output.decode(&#39;utf-8&#39;).encode(&#39;gbk&#39;)&#10;&#10;        i += 1&#10;    number += 1&#10;    data[&#39;TextBox1&#39;] = &#39;24011&#39; + str(number).zfill(4)&#10;    post_data = urllib.urlencode(data)&#10;    req = urllib2.urlopen(url, post_data)&#10;    content = req.read().split(&#39;\n&#39;)&#10;    time.sleep(1)</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/06/python实现的爬取中考成绩的爬虫/" data-id="ciqfd3yyk000ck0o04rvsai44" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -293,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/HELLOWORLD/" data-id="ciqfd3yy20000k0o04oa9p0o8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/HELLOWORLD/" data-id="ciqfd6mug0000xgo0qsj6d2t3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/article/">article</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
@@ -326,7 +324,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/article/">article</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d游戏开发/">cocos2d游戏开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/article/">article</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d游戏开发/">cocos2d游戏开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -335,7 +333,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cocos2d游戏开发/" style="font-size: 10px;">cocos2d游戏开发</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+      <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cocos2d游戏开发/" style="font-size: 10px;">cocos2d游戏开发</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
     </div>
   </div>
 
@@ -344,7 +342,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -356,6 +354,10 @@
       <ul>
         
           <li>
+            <a href="/2016/07/10/python实现的爬取中考成绩的爬虫/">python实现的爬取中考成绩的爬虫</a>
+          </li>
+        
+          <li>
             <a href="/2015/07/12/cocos2d&&c++中图的一些细节/">cocos2d/c++ 中图的一些细节</a>
           </li>
         
@@ -365,10 +367,6 @@
         
           <li>
             <a href="/2015/06/06/冒泡排序与快速排序/">冒泡排序与快速排序</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/06/python实现的爬取中考成绩的爬虫/">python实现的爬取中考成绩的爬虫</a>
           </li>
         
           <li>
